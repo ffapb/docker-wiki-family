@@ -1,5 +1,5 @@
 # docker-wiki-family
-Docker image hosting a [wiki family](https://www.mediawiki.org/wiki/Manual:Wiki_family) using Mediawiki
+Docker image hosting a [wiki family](https://www.mediawiki.org/wiki/Manual:Wiki_family) using Mediawiki and MySql
 
 Sponsored by [FFA Private Bank](http://www.ffaprivatebank.com/)
 
