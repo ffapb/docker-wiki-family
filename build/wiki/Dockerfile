@@ -1,6 +1,6 @@
 FROM simplyintricate/mediawiki:1.28
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 COPY LocalSettings.php /usr/share/nginx/html/LocalSettings.php
 COPY LocalSettings_ffa_re_pnp.php /usr/share/nginx/html/LocalSettings_ffa_re_pnp.php
 COPY LocalSettings_ffa_pb_pnp.php /usr/share/nginx/html/LocalSettings_ffa_pb_pnp.php
