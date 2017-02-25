@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS wiki_ffa_re_pnp;
+CREATE DATABASE IF NOT EXISTS wiki_ffa_pb_pnp;
