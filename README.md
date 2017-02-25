@@ -9,6 +9,7 @@ Sponsored by [FFA Private Bank](http://www.ffaprivatebank.com/)
 2. Edit the `wgServer` variable in `build/wiki/LocalSettings.php`
 3. Copy `docker-compose.yml` to `docker-compose.override.yml` with only the env var sections with your own values
 4. `docker-compose up`
+5. Browse to `http://localhost:port`
 
 ## Features
 * emails via smtp/swiftmailer
