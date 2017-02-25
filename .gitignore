@@ -1,2 +1,3 @@
 build/wiki-alpine/
 *.swp
+docker-compose.override.yml

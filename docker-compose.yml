@@ -15,6 +15,10 @@ services:
       - "8001:8001"
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - SMTP_HOST=smtp.server.com
+      - SMTP_PORT=8888
+      - SMTP_USERNAME=username
+      - SMTP_PASSWORD=password
 
   db:
     #image: mysql:8

@@ -51,11 +51,19 @@ $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
+function getenvOrFail($name) {
+  $wgDBpassword = getenv($name);
+  if(!$wgDBpassword) {
+    throw new \Exception("Missing env var ".$name);
+  }
+  return $wgDBpassword;
+}
+
 ## Database settings
 $wgDBtype = "mysql";
 $wgDBserver = "db";
 $wgDBuser = "root";
-$wgDBpassword = getenv("MYSQL_ROOT_PASSWORD");
+$wgDBpassword = getenvOrFail("MYSQL_ROOT_PASSWORD");
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -142,4 +150,13 @@ wfLoadExtension( 'WikiEditor' );
 
 # End of automatically generated settings.
 # Add more configuration options below.
-
+require_once "$IP/extensions/SwiftMailer/SwiftMailer.php";
+$wgShowExceptionDetails = true; 
+$wgSMTP = array(
+ 'host'     => getenvOrFail("SMTP_HOST"), // could also be an IP address. Where the SMTP server is located
+ 'IDHost'   => "ffaprivatebank.com",      // Generally this will be the domain name of your website (aka mywiki.org)
+ 'port'     => getenvOrFail("SMTP_PORT"),                 // Port to use when connecting to the SMTP server
+ 'auth'     => true,               // Should we use SMTP authentication (true or false)
+ 'username' => getenvOrFail("SMTP_USERNAME"),     // Username to use for SMTP authentication (if being used)
+ 'password' => getenvOrFail("SMTP_PASSWORD")       // Password to use for SMTP authentication (if being used)
+);
