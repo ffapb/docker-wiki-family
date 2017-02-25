@@ -55,7 +55,7 @@ $wgEmailAuthentication = true;
 $wgDBtype = "mysql";
 $wgDBserver = "db";
 $wgDBuser = "root";
-$wgDBpassword = "my-secret-pw";
+$wgDBpassword = getenv("MYSQL_ROOT_PASSWORD");
 
 # MySQL specific settings
 $wgDBprefix = "";

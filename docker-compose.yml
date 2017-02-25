@@ -13,6 +13,8 @@ services:
     ports:
       # update nginx config in build/wiki/default.conf with this port
       - "8001:8001"
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
 
   db:
     #image: mysql:8
