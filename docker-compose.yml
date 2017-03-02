@@ -10,15 +10,19 @@ services:
     volumes:
       - /data/ffa-wiki-family/images/:/usr/share/nginx/html/images
       - /data/ffa-wiki-family/extensions/:/tmp/extensions
-    ports:
-      # update nginx config in build/wiki/default.conf with this port
-      - "8001:8001"
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
       - SMTP_HOST=smtp.server.com
       - SMTP_PORT=8888
       - SMTP_USERNAME=username
       - SMTP_PASSWORD=password
+      - NGINX_HOST=123.123.123.123
+      - NGINX_PORT=8001
+      # Mediawiki secret: https://www.mediawiki.org/wiki/Manual:$wgSecretKey
+      - MW_SECRET=abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz01
+    #ports:
+      # should be compatible with NGINX_PORT above
+      #- "8001:8001"
 
   db:
     #image: mysql:8
@@ -27,7 +31,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
     volumes:
-      - /data/ffa-wikis-db
+      - /data/ffa-wikis-db:/var/lib/mysql
 
   initdb:
     #image: mysql:8

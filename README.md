@@ -4,12 +4,17 @@ Docker image hosting a [wiki family](https://www.mediawiki.org/wiki/Manual:Wiki_
 Sponsored by [FFA Private Bank](http://www.ffaprivatebank.com/)
 
 ## Usage
-1. Edit `build/wiki/nginx-default.conf` port number as desired
-  * mirror in `docker-compose.yml/wiki/ports`
-2. Edit the `wgServer` variable in `build/wiki/LocalSettings.php`
-3. Copy `docker-compose.yml` to `docker-compose.override.yml` with only the env var sections with your own values
-4. `docker-compose up`
-5. Browse to `http://localhost:port`
+1. Copy `docker-compose.yml` to `docker-compose.override.yml` and override the `environment` and `volumes`
+  * `wiki` service `environment`:
+    * `NGINX_*` variables: hostname and port number to be used by nginx
+    * `SMTP_*`: configuration to use for SMTP emails from the wikis
+    * `MYSQL_ROOT_PASSWORD`: should be the same as the `db` service
+    * `MW_SECRET`: this is mediawiki's [$wgSecretKey](https://www.mediawiki.org/wiki/Manual:$wgSecretKey). Set to a secret random string. Check the documentation for more info
+  * `db` and `initdb` environment variable `MYSQL_ROOT_PASSWORD`: should be the same. Check documentation of the [mysql docker page](https://hub.docker.com/_/mysql/)
+  * `db` volumes: folder to store database data permanently. Also check documentation of the [mysql docker page](https://hub.docker.com/_/mysql/)
+2. `docker-compose up`
+3. Wait a minute (or monitor the logs) while the database boots up
+4. Browse to `http://hostname:port`
 
 ## Features
 * emails via smtp/swiftmailer

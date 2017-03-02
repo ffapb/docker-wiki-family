@@ -15,6 +15,14 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
+function getenvOrFail($name) {
+  $wgDBpassword = getenv($name);
+  if(!$wgDBpassword) {
+    throw new \Exception("Missing env var ".$name);
+  }
+  return $wgDBpassword;
+}
+
 $callingurl = strtolower( $_SERVER['REQUEST_URI'] ); // get the calling url
 if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
         require_once 'LocalSettings_ffa_re_pnp.php';
@@ -33,7 +41,7 @@ if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
 
 ## The protocol and server name to use in fully-qualified URLs
 # $wgServer = "http://pmo.ffaprivatebank.com:8123";
-$wgServer = "http://52.24.193.101:8001";
+$wgServer = sprintf("http://%s:%s", getenvOrFail("NGINX_HOST"), getenvOrFail("NGINX_PORT"));
 # https://lists.gt.net/wiki/mediawiki/405733
 #$wgServer = "http://$_SERVER[REMOTE_ADDR]"; 
 #$wgServer = "http://$_SERVER[HTTP_HOST]"; 
@@ -51,13 +59,6 @@ $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
-function getenvOrFail($name) {
-  $wgDBpassword = getenv($name);
-  if(!$wgDBpassword) {
-    throw new \Exception("Missing env var ".$name);
-  }
-  return $wgDBpassword;
-}
 
 ## Database settings
 $wgDBtype = "mysql";
@@ -105,7 +106,8 @@ $wgShellLocale = "C.UTF-8";
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "en";
 
-$wgSecretKey = "c8c38fe4ce2b152558460a415ff60fae44e0f1fe3f1b44b3e6da6da090487222";
+# https://www.mediawiki.org/wiki/Manual:$wgSecretKey
+$wgSecretKey = getenvOrFail("MW_SECRET");
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
