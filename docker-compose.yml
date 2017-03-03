@@ -32,7 +32,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
     volumes:
-      - /data/ffa-wikis-db:/var/lib/mysql
+      - /data/ffa-wiki-family/db:/var/lib/mysql
 
   initdb:
     #image: mysql:8
