@@ -35,6 +35,10 @@ if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
 #        exit( 0 );
 }
 
+# Set the upload directory
+# https://www.mediawiki.org/wiki/Manual:$wgUploadDirectory
+$wgUploadDirectory="{$IP}/images".$wgScriptPath;
+$wgUploadPath="{$wgScriptPath}/images".$wgScriptPath;
 
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
