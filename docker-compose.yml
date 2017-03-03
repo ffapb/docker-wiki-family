@@ -17,7 +17,8 @@ services:
       - SMTP_USERNAME=username
       - SMTP_PASSWORD=password
       - NGINX_HOST=123.123.123.123
-      - NGINX_PORT=8001
+      # NGINX_PORT should be the same as the published port, below, or 80 by default
+      - NGINX_PORT=80
       # Mediawiki secret: https://www.mediawiki.org/wiki/Manual:$wgSecretKey
       - MW_SECRET=abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz01
     #ports:

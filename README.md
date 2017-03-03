@@ -6,7 +6,10 @@ Sponsored by [FFA Private Bank](http://www.ffaprivatebank.com/)
 ## Usage
 1. Copy `docker-compose.yml` to `docker-compose.override.yml` and override the `environment` and `volumes`
   * `wiki` service `environment`:
-    * `NGINX_*` variables: hostname and port number to be used by nginx
+    * `NGINX_HOST` variable: _external_ hostname seen by the wiki users
+    * `NGINX_PORT`: external port number seen by the wiki users
+      * The nginx port number is hardcoded to be 80
+      * This variable should be the same as in the `ports` section of the docker-compose file
     * `SMTP_*`: configuration to use for SMTP emails from the wikis
     * `MYSQL_ROOT_PASSWORD`: should be the same as the `db` service
     * `MW_SECRET`: this is mediawiki's [$wgSecretKey](https://www.mediawiki.org/wiki/Manual:$wgSecretKey). Set to a secret random string. Check the documentation for more info
