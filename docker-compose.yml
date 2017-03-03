@@ -8,8 +8,8 @@ services:
       initdb:
         condition: service_healthy
     volumes:
-      - /data/ffa-wiki-family/images/:/usr/share/nginx/html/images
-      - /data/ffa-wiki-family/extensions/:/tmp/extensions
+      - /data/docker-wiki-family/images/:/usr/share/nginx/html/images
+      - /data/docker-wiki-family/extensions/:/tmp/extensions
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
       - SMTP_HOST=smtp.server.com
@@ -32,7 +32,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
     volumes:
-      - /data/ffa-wiki-family/db:/var/lib/mysql
+      - /data/docker-wiki-family/db:/var/lib/mysql
 
   initdb:
     #image: mysql:8
