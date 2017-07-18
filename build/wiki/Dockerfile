@@ -17,6 +17,7 @@ COPY LocalSettings.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_re_pnp.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_pb_pnp.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_pb_kyc.php /usr/share/nginx/html/
+COPY LocalSettings_ffa_pb_pmo.php /usr/share/nginx/html/
 
 COPY logo-ffa-re.png /usr/share/nginx/html/resources/assets/
 COPY logo-ffa-pb.gif /usr/share/nginx/html/resources/assets/

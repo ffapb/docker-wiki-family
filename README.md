@@ -50,4 +50,12 @@ sudo chown www-data:www-data ffa_pb_kyc -R
   6. Add to wiki/nginx-default.conf section for location of `ffa_pb_kyc`
     - Note two embeded locations there
 
-When done, run `bash tests.sh 8001`
+4. Re-build services
+
+```
+./docker-compose.sh build initdb wiki
+./docker-compose.sh up -d initdb
+./docker-compose.sh up -d wiki
+```
+
+5. When done, run `bash tests.sh 8001`

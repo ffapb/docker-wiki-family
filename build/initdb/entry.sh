@@ -20,3 +20,4 @@ create_db() {
 create_db wiki_ffa_re_pnp
 create_db wiki_ffa_pb_pnp
 create_db wiki_ffa_pb_kyc
+create_db wiki_ffa_pb_pmo

@@ -21,7 +21,7 @@ args=(
 )
 
 QUERY="select count(*) as n from watchlist"
-DBNAMES=(wiki_ffa_re_pnp wiki_ffa_pb_pnp wiki_ffa_pb_kyc)
+DBNAMES=(wiki_ffa_re_pnp wiki_ffa_pb_pnp wiki_ffa_pb_kyc wiki_ffa_pb_pmo)
 
 for DB in "${DBNAMES[@]}"
 do
