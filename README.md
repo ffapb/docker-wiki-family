@@ -28,6 +28,8 @@ Sponsored by [FFA Private Bank](http://www.ffaprivatebank.com/)
 
 ## Adding a wiki to the family
 
+Instructions below exemplified in [commit fdfe8f60](https://github.com/shadiakiki1986/docker-wiki-family/commit/fdfe8f604c4f999aa01f65c7f4ad043d3b3a02e8)
+
 1. Add images folder
 ```
 cd /data/docker-wiki-family/images/
