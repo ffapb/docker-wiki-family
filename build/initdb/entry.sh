@@ -1,13 +1,22 @@
 #!/bin/bash
 
-# If the FFA RE database and archive table exist, then exit
-echo "select 1 from archive limit 1;" | mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db -D wiki_ffa_re_pnp
-if [ $? -eq 0 ]; then
-  echo "It seems that the wiki family databases already exist .. aborting creation of databases/tables"
-  exit 1
-fi
+echo "initdb for wiki family databases"
 
-# proceed with creation
-mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db                    < /usr/src/initdb/create_mediawiki_databases.sql
-mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db -D wiki_ffa_re_pnp < /usr/src/initdb/create_mediawiki_tables.sql
-mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db -D wiki_ffa_pb_pnp < /usr/src/initdb/create_mediawiki_tables.sql
+create_db() {
+  DBNAME=$1
+
+  # If the database and archive table exist, then abort
+  echo "select 1 from archive limit 1;" | mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db -D $DBNAME >> /dev/null
+  if [ $? -eq 0 ]; then
+    echo "Database for $DBNAME already exists .. skipping"
+  else
+    echo "Create database for $DBNAME ..."
+    echo "CREATE DATABASE IF NOT EXISTS $DBNAME;" | mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db
+    mysql -u root --password="$MYSQL_ROOT_PASSWORD" -h db -D $DBNAME < /usr/src/initdb/create_mediawiki_tables.sql
+    echo " ... Done"
+  fi
+}
+
+create_db wiki_ffa_re_pnp
+create_db wiki_ffa_pb_pnp
+create_db wiki_ffa_pb_kyc

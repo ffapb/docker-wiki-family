@@ -28,6 +28,8 @@ if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
         require_once 'LocalSettings_ffa_re_pnp.php';
 } elseif ( strpos( $callingurl, '/ffa_pb_pnp/' ) === 0 ) {
         require_once 'LocalSettings_ffa_pb_pnp.php';
+} elseif ( strpos( $callingurl, '/ffa_pb_kyc/' ) === 0 ) {
+        require_once 'LocalSettings_ffa_pb_kyc.php';
 #} else {
 # Do not do this, otherwise the mediawiki skins will fail to be loaded
 #        header( 'HTTP/1.1 404 Not Found' );

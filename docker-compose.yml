@@ -17,13 +17,15 @@ services:
       - SMTP_USERNAME=username
       - SMTP_PASSWORD=password
       - NGINX_HOST=123.123.123.123
-      # NGINX_PORT should be the same as the published port, below, or 80 by default
-      - NGINX_PORT=80
+      # NGINX_PORT should be the same as the left-hand side
+      # of published port, below, or 80 by default
+      - NGINX_PORT=8001
       # Mediawiki secret: https://www.mediawiki.org/wiki/Manual:$wgSecretKey
       - MW_SECRET=abcdefghijklmnopqrstuvwxyz0123456789abcdefghijklmnopqrstuvwxyz01
     #ports:
-      # should be compatible with NGINX_PORT above
-      #- "8001:8001"
+      # Left-hand side should be compatible with NGINX_PORT above
+      # Right-hand side should stay "80"
+      #- "8001:80"
 
   db:
     #image: mysql:8

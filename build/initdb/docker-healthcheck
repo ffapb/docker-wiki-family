@@ -21,10 +21,13 @@ args=(
 )
 
 QUERY="select count(*) as n from watchlist"
-if select="$(echo '$QUERY' | mysql "${args[@]}" -D wiki_ffa_re_pnp)" && [ "$select" = '0' ]; then
-  if select="$(echo '$QUERY' | mysql "${args[@]}" -D wiki_ffa_pb_pnp)" && [ "$select" = '0' ]; then
-  	exit 0
-  fi
-fi
+DBNAMES=(wiki_ffa_re_pnp wiki_ffa_pb_pnp wiki_ffa_pb_kyc)
 
-exit 1
+for DB in "${DBNAMES[@]}"
+do
+  if select="$(echo '$QUERY' | mysql "${args[@]}" -D $DB)" && [ "$select" != '0' ]; then
+    exit 1 # unhealthy
+  fi
+done
+
+exit 0 # healthy

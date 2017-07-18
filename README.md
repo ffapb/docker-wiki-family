@@ -25,3 +25,29 @@ Sponsored by [FFA Private Bank](http://www.ffaprivatebank.com/)
 
 ## Testing
 `bash tests.sh` and travis
+
+## Adding a wiki to the family
+
+1. Add images folder
+```
+cd /data/docker-wiki-family/images/
+sudo mkdir ffa_pb_kyc
+sudo chown www-data:www-data ffa_pb_kyc -R
+```
+
+2. append to `initdb` service
+  -  `cd build && echo 'create_db wiki_ffa_pb_kyc' >> initdb/entry.sh`
+  - add to `initdb/docker-healthcheck` DBNAMES variable: `wiki_ffa_pb_kyc`
+3. add in `wiki` service
+
+  1. an entry to wiki/wiki-family-entrance-index.html
+  2. `cp wiki/LocalSettings_ffa_pb_pnp.php wiki/LocalSettings_ffa_pb_kyc.php`
+  3. Edit `wiki/LocalSettings_ffa_pb_kyc.php`
+  4. Add to wiki/Dockerfile:
+    - `cp LocalSettings_ffa_pb_kyc.php /usr/share/nginx/html/`
+    - logo if different: `cp logo-ffa-pb.gif /usr/share/nginx/html/resources/assets/`
+  5. Add to wiki/LocalSettings.php section about `LocalSettings_ffa_pb_kyc.php`
+  6. Add to wiki/nginx-default.conf section for location of `ffa_pb_kyc`
+    - Note two embeded locations there
+
+When done, run `bash tests.sh 8001`
