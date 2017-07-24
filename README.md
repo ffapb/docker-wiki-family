@@ -97,3 +97,16 @@ so that the proper wiki family member is selected.
 
 ## Access restrictions
 Use [Extension:Restrict access by category and group](https://www.mediawiki.org/wiki/Extension:Restrict_access_by_category_and_group)
+
+## Database backups
+The docker images that already do this
+- [nickbreen/docker-mysql-backup-cron](https://github.com/nickbreen/docker-mysql-backup-cron)
+  - only does s3 backups
+- [CANDY-LINE/docker-mysql-backup-cron](https://github.com/CANDY-LINE/docker-mysql-backup-cron)
+  - this is fork of nickbreen's repo
+  - does s3 as well as local and other options
+- [fradelg/docker-mysql-cron-backup](https://github.com/fradelg/docker-mysql-cron-backup)
+  - does local backups only
+  - this seems to be the simplest of all, with 11 commits, so I will go with this
+  - also has travis CI testing
+  - docker image based on alpine

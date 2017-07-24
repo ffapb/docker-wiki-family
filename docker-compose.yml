@@ -33,8 +33,8 @@ services:
       context: build/db
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
-    volumes:
-      - /data/docker-wiki-family/db:/var/lib/mysql
+    #volumes:
+    #  - /path/to/local/db:/var/lib/mysql
 
   initdb:
     #image: mysql:8
@@ -45,3 +45,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  bkpdb:
+    image: fradelg/mysql-cron-backup:latest
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=admin
+      - MYSQL_PASS=password
+      - INIT_BACKUP=true
+    #volumes:
+    #  - /path/to/backup:/backup
