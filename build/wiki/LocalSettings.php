@@ -23,7 +23,18 @@ function getenvOrFail($name) {
   return $wgDBpassword;
 }
 
-$callingurl = strtolower( $_SERVER['REQUEST_URI'] ); // get the calling url
+$callingurl = NULL;
+if(array_key_exists('REQUEST_URI', $_SERVER)) {
+  $callingurl = strtolower( $_SERVER['REQUEST_URI'] ); // get the calling url
+} else {
+  // for maintenance commands, e.g. maintenance/importDump.php, assuming database prefix is "wiki_"
+  // extract the wiki name and simulate a "calling url"
+  $callingurl = implode(' ',$argv);
+  $callingurl = preg_replace("/.*(--wiki)\s+wiki_(\w*).*/","$2",$callingurl);
+  $callingurl = "/".$callingurl."/";
+  var_dump('calling url', $callingurl, strpos( $callingurl, '/ffa_pb_pmo/' ));
+}
+
 if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
         require_once 'LocalSettings_ffa_re_pnp.php';
 } elseif ( strpos( $callingurl, '/ffa_pb_pnp/' ) === 0 ) {
@@ -38,6 +49,7 @@ if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
 #        echo "This wiki (\"" . htmlspecialchars( $callingurl ) . "\") is not available. Check configuration.";
 #        exit( 0 );
 }
+
 
 # Set the upload directory
 # https://www.mediawiki.org/wiki/Manual:$wgUploadDirectory
@@ -170,3 +182,5 @@ $wgSMTP = array(
  'username' => getenvOrFail("SMTP_USERNAME"),     // Username to use for SMTP authentication (if being used)
  'password' => getenvOrFail("SMTP_PASSWORD")       // Password to use for SMTP authentication (if being used)
 );
+
+$wgShowDBErrorBacktrace = true;

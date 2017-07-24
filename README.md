@@ -61,3 +61,20 @@ sudo chown www-data:www-data ffa_pb_kyc -R
 ```
 
 5. When done, run `bash tests.sh 8001`
+
+## Import XML dump
+[docs](https://www.mediawiki.org/wiki/Manual:Restoring_a_wiki_from_backup#From_an_XML_dump)
+```
+./docker-compose.sh exec wiki bash
+cd /usr/share/nginx/html/maintenance
+php importDump.php --dbpass password --dbuser user --wiki wiki_ffa_pb_pmo file.xml 
+```
+
+If the wiki database name does not start with `wiki_`, check the note in `LocalSettings.php` about "simulating calling url"
+
+Even though `rebuildrecentchanges.php` does not take `--wiki wiki_dbname`, add it so that the command can tell which wiki family member to use.
+- Otherwise, an error will be generated:
+- `DBConnectionError from line 748 of /usr/share/nginx/html/includes/libs/rdbms/database/Database.php: Cannot access the database: Unknown database 'my_wiki' (db)`
+- `php rebuildrecentchanges.php --wiki wiki_ffa_pb_pmo`
+
+Open the wiki `Main Page`, go to history, and revert the most recent edit to see the most recent `Main Page` from the imported wiki
