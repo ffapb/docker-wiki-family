@@ -78,3 +78,6 @@ Even though `rebuildrecentchanges.php` does not take `--wiki wiki_dbname`, add i
 - `php rebuildrecentchanges.php --wiki wiki_ffa_pb_pmo`
 
 Open the wiki `Main Page`, go to history, and revert the most recent edit to see the most recent `Main Page` from the imported wiki
+
+## Access restrictions
+Use [Extension:Restrict access by category and group](https://www.mediawiki.org/wiki/Extension:Restrict_access_by_category_and_group)
