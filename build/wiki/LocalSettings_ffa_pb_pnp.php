@@ -24,3 +24,9 @@ $wgResourceBasePath = $wgScriptPath;
 $wgLogo = "$wgResourceBasePath/resources/assets/logo-ffa-pb.gif";
 
 $wgDBname = "wiki_ffa_pb_pnp";
+
+# If the below file exists, include it
+$fnExtend = __DIR__."/LocalSettings_ffa_pb_pnp-extended.php";
+if(file_exists($fnExtend)) {
+  require_once $fnExtend;
+}

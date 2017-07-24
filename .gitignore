@@ -2,3 +2,4 @@ build/wiki-alpine/
 *.swp
 docker-compose.override.yml
 docker-compose.sh
+build/wiki/LocalSettings_ffa_pb_pnp-extended.php

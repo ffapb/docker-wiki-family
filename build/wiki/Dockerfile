@@ -16,6 +16,7 @@ COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 COPY LocalSettings.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_re_pnp.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_pb_pnp.php /usr/share/nginx/html/
+COPY LocalSettings_ffa_pb_pnp-extended.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_pb_kyc.php /usr/share/nginx/html/
 COPY LocalSettings_ffa_pb_pmo.php /usr/share/nginx/html/
 

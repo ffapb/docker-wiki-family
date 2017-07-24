@@ -32,7 +32,7 @@ if(array_key_exists('REQUEST_URI', $_SERVER)) {
   $callingurl = implode(' ',$argv);
   $callingurl = preg_replace("/.*(--wiki)\s+wiki_(\w*).*/","$2",$callingurl);
   $callingurl = "/".$callingurl."/";
-  var_dump('calling url', $callingurl, strpos( $callingurl, '/ffa_pb_pmo/' ));
+  # var_dump('calling url', $callingurl, strpos( $callingurl, '/ffa_pb_pmo/' ));
 }
 
 if ( strpos( $callingurl, '/ffa_re_pnp/' )  === 0 ) {
@@ -168,7 +168,11 @@ wfLoadSkin( 'Vector' );
 # to LocalSettings.php. Check specific extension documentation for more details.
 # The following extensions were automatically enabled:
 wfLoadExtension( 'WikiEditor' );
-
+# https://www.mediawiki.org/wiki/Extension:WikiEditor
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+$wgDefaultUserOptions['usebetatoolbar-cgd'] = 1;
+$wgDefaultUserOptions['wikieditor-preview'] = 1;
+$wgDefaultUserOptions['wikieditor-publish'] = 1;
 
 # End of automatically generated settings.
 # Add more configuration options below.
