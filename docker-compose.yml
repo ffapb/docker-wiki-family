@@ -47,11 +47,14 @@ services:
         condition: service_healthy
 
   bkpdb:
+    # https://github.com/fradelg/docker-mysql-cron-backup/
     image: fradelg/mysql-cron-backup:latest
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=admin
       - MYSQL_PASS=password
       - INIT_BACKUP=true
+      # weekly backup
+      - CRON_TIME=0 0 * * 1
     #volumes:
     #  - /path/to/backup:/backup
