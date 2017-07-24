@@ -62,7 +62,18 @@ sudo chown www-data:www-data ffa_pb_kyc -R
 
 5. When done, run `bash tests.sh 8001`
 
-## Import XML dump
+## Import database
+~~For a wiki without any images, it's easy to just use the `Import XML dump` method.~~
+~~Otherwise, use the `Import db dump` method.~~
+
+EDIT:
+
+While migrating from mediawiki 1.21 to 1.28, I used the xml dump method, copied the images folder, and didn't see any images in the wiki.
+So I resorted to the mysql db dump method.
+However, I now realize that my problem was simply that I should have run `php wikifolder/maintenance/importImages.php wikifolder_backup/images --wiki wiki_ffa_pb_pnp` after copying the images files.
+Anyway, keeping the import with the db dump import since it also imports the users with their passwords.
+
+### Import XML dump
 [docs](https://www.mediawiki.org/wiki/Manual:Restoring_a_wiki_from_backup#From_an_XML_dump)
 ```
 ./docker-compose.sh exec wiki bash
@@ -78,6 +89,11 @@ Even though `rebuildrecentchanges.php` does not take `--wiki wiki_dbname`, add i
 - `php rebuildrecentchanges.php --wiki wiki_ffa_pb_pmo`
 
 Open the wiki `Main Page`, go to history, and revert the most recent edit to see the most recent `Main Page` from the imported wiki
+
+### Import mysql db dump
+Follow instructions in [docs](https://www.mediawiki.org/wiki/Manual:Restoring_a_wiki_from_backup)
+until `update.php`, which should be run as `php wikifolder/maintenance/update.php --wiki wiki_ffa_pn_pnp`
+so that the proper wiki family member is selected.
 
 ## Access restrictions
 Use [Extension:Restrict access by category and group](https://www.mediawiki.org/wiki/Extension:Restrict_access_by_category_and_group)
