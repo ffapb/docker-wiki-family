@@ -76,9 +76,11 @@ Anyway, keeping the import with the db dump import since it also imports the use
 ### Import XML dump
 [docs](https://www.mediawiki.org/wiki/Manual:Restoring_a_wiki_from_backup#From_an_XML_dump)
 ```
+CONTAINERID=`docker ps|grep wikifamily_wiki|awk '{print $1}'`
+docker cp file.xml $CONTAINERID:/home/
 ./docker-compose.sh exec wiki bash
 cd /usr/share/nginx/html/maintenance
-php importDump.php --dbpass password --dbuser user --wiki wiki_ffa_pb_pmo file.xml 
+php importDump.php --dbpass password --dbuser user --wiki wiki_ffa_pb_pmo /home/file.xml 
 ```
 
 If the wiki database name does not start with `wiki_`, check the note in `LocalSettings.php` about "simulating calling url"

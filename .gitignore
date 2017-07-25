@@ -4,3 +4,4 @@ docker-compose.override.yml
 docker-compose.sh
 build/wiki/LocalSettings_ffa_pb_pnp-extended.php
 ffawiki.20170724.sql
+mediawiki_backup_20170725T104239.xml
