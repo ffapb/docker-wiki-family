@@ -112,3 +112,16 @@ The docker images that already do this
   - this seems to be the simplest of all, with 11 commits, so I will go with this
   - also has travis CI testing
   - docker image based on alpine
+
+
+## User change password
+
+To use the mediawiki `changePassword.php` script, use as follows
+
+```
+docker-compose exec wiki bash
+pwd
+# /usr/share/nginx/html/
+cd maintenance
+php changePassword.php --user "Shadi Akiki" --password "pizza" --wiki "wiki_ffa_pb_pmo"
+```
